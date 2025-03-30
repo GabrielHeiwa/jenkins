@@ -18,5 +18,14 @@ pipeline {
                 }
             }
         }
+
+        stage('Print Environment Variables') {
+            steps {
+                script {
+                    echo "Loaded environment variables:"
+                    sh 'env | sort'
+                }
+            }
+        }
     }
 }
