@@ -13,8 +13,6 @@ pipeline {
                     def branchParts = BRANCH_NAME.split('/')
                     def branchName = branchParts[branchParts.length - 1]
                     echo "Branch name: ${branchName}"
-                    // Set the branch name to BRANCH_NAME
-                    env.BRANCH_NAME = branchName
                     // Load environment variables from the .env file
                     // The .env file should be named according to the branch name
                     def envFile = ".env.${BRANCH_NAME}"
