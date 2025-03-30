@@ -14,6 +14,7 @@ pipeline {
                     }
                     withEnv(envList) {
                         sh 'echo $MY_VARIABLE'
+                        sh 'env | sort'
                     }
                 }
             }
