@@ -1,0 +1,34 @@
+pipeline {
+    agent {
+        docker {
+            image 'node:23.1.0-alpine'
+        }
+    }
+
+    stages {
+        stage('Install Dependencies') {
+            steps {
+                script {
+                    sh 'npm install'
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                script {
+                    sh 'npm run build'
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Build and Docker image creation completed successfully!'
+        }
+        failure {
+            echo 'Build failed. Please check the logs.'
+        }
+    }
+}
