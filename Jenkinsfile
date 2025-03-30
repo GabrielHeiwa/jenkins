@@ -15,7 +15,7 @@ pipeline {
                     echo "Branch name: ${branchName}"
                     // Load environment variables from the .env file
                     // The .env file should be named according to the branch name
-                    def envFile = ".env.${BRANCH_NAME}"
+                    def envFile = ".env.${branchName}"
                     if (fileExists(envFile)) {
                         def props = readFile(envFile).split('\n')
                         props.each { line ->
