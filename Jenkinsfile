@@ -2,13 +2,21 @@ pipeline {
     agent any
     
     environment {
-        BRANCH_NAME = "${env.BRANCH_NAME}"
+        BRANCH_NAME = "${env.GIT_BRANCH}"
     }
     
     stages {
         stage('Load Environment Variables') {
             steps {
                 script {
+                    // Split BRANCH_NAME by / and get branch name
+                    def branchParts = BRANCH_NAME.split('/')
+                    def branchName = branchParts[branchParts.length - 1]
+                    echo "Branch name: ${branchName}"
+                    // Set the branch name to BRANCH_NAME
+                    env.BRANCH_NAME = branchName
+                    // Load environment variables from the .env file
+                    // The .env file should be named according to the branch name
                     def envFile = ".env.${BRANCH_NAME}"
                     if (fileExists(envFile)) {
                         def props = readFile(envFile).split('\n')
